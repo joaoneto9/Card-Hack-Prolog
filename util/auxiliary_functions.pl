@@ -1,10 +1,17 @@
 :- module(auxiliary_functions, [
+	el_count/3,
     truncate_at/3,
     random_int/3,
     split/3,
     sum_cards/2,
     get_str_value/2
     ]).
+
+el_count(_, [], 0) :- !.
+el_count(H, [H|T], R) :-
+	el_count(H, T, R2),
+	R is 1 + R2.
+el_count(H, [_|T], R) :- el_count(H, T, R).
 
 truncate_at(X, N, Result) :-
     Factor is 10 ** N,
@@ -16,7 +23,6 @@ random_int(Low, High, Result) :-
 split(Text, Separator, List) :-
     atomic_list_concat(List, Separator, Text).
 
-% Unificado: Aceita Átomo, String ou Número e retorna o valor de Blackjack
 get_str_value(X, 11) :- member(X, ['A', "A"]), !.
 get_str_value(X, 10) :- member(X, ['J', 'K', 'Q', '10', "J", "K", "Q", "10"]), !.
 get_str_value(X, Result) :-
@@ -25,7 +31,6 @@ get_str_value(X, Result) :-
     ;   string(X) -> number_string(X, Str), number_string(Result, Str)
     ), !.
 
-% Auxiliar para contar Ás independentemente do formato
 is_ace('A').
 is_ace("A").
 

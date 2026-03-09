@@ -1,19 +1,20 @@
 :- use_module('./util/auxiliary_functions').
+:- use_module('./components/prob_algorithm').
 
 len_dealers_card([_]).
-all_cards_are_valid(X) :- subset(X, ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']).
+all_cards_are_valid(X) :- subset(X, ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']).
 min_len_user_cards(X) :-
     length(X, TAM),
     TAM > 1.
 
 filter_cards_above_interupt(_, _, []). 
 filter_cards_above_interupt(Lista, [H_dealer|_], [H|T]) :-
-    count(H, Lista, Qtd),
+    el_count(H, Lista, Qtd),
     ((H_dealer == H) -> Sum_dealer = 1; Sum_dealer = 0), 
     ((Qtd + Sum_dealer > 4 ) -> false; filter_cards_above_interupt(Lista, [H_dealer], T)). 
 
 check_quantity_card_limits(X, Y) :- 
-    filter_cards_above_interupt(X, Y, ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']).
+    filter_cards_above_interupt(X, Y, ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']).
 
 validate_user_cards(X) :- 
     min_len_user_cards(X),
@@ -34,5 +35,8 @@ main :-
     validate_dealers_card(Y),
 
     check_quantity_card_limits(X, Y),
-    format('Dealers Card: ~w', [Y]), nl.
+    format('Dealers Card: ~w', [Y]), nl,
 
+	calculate_probs(X, Y, (Get, Stay)),
+	format('Get prob: ~w', Get), nl,
+	format('Stay prob: ~w', Stay), nl.
