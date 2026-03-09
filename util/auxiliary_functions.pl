@@ -2,7 +2,8 @@
     truncate_at/3,
     random_int/3,
     split/3,
-    sum_cards/2
+    sum_cards/2,
+    count/3
     ]).
 
 truncate_at(X, N, Result) :-
@@ -21,7 +22,6 @@ get_str_value(X, Result) :- ((member(X, ['J', 'Q', 'K']) -> Result = 10; Result 
 count(X, Lista, Result) :- 
     include(==(X), Lista, Filter_list),
     length(Filter_list, Result).
-    
 
 sum_cards(Lista, Result) :-
     maplist(get_str_value, Lista, List_maped),
