@@ -3,15 +3,12 @@
 :- use_module(deck).
 :- use_module('../util/auxiliary_functions').
 
-% --- Predicados de Verificação ---
 is_blackjack(Cards) :-
     sum_cards(Cards, 21).
 
 is_overflow(Cards) :-
     sum_cards(Cards, Sum),
     Sum > 21.
-
-% --- Lógica de Probabilidade ---
 
 overflow_prob(Cards, Limit, Deck, Prob) :-
     sum_cards(Cards, CurrentSum),
@@ -53,8 +50,6 @@ blackjack_prob(Cards, Deck, Prob) :-
     total_cards_in_deck(Deck, Total),
     (Total > 0 -> Prob is Count / Total ; Prob = 0.0).
 
-% --- Interface de Cálculo de Média ---
-
 average_prob_user_interface(UserCards, DealerCards, Result) :-
     average_prob_user(UserCards, DealerCards, 50, 0, (0.0, 0.0), Result).
 
@@ -69,12 +64,10 @@ average_prob_user(UserCards, DealerCards, Limit, Iter, (AccGet, AccStay), Result
     NextIter is Iter + 1,
     average_prob_user(UserCards, DealerCards, Limit, NextIter, (NewAccGet, NewAccStay), Result).
 
-% --- Lógica de Simulação por Rodada ---
-
 prob_user(UserCards, DealerCards, (ProbGetTrunc, ProbStayTrunc)) :-
     sum_cards(UserCards, SumUser),
     (   SumUser >= 21 
-    ->  ProbGetTrunc = 0.0, ProbStayTrunc = 100.0 % Segurança extra
+    ->  ProbGetTrunc = 0.0, ProbStayTrunc = 100.0 
     ;   generate_deck(StarterDeck),
         append(UserCards, DealerCards, AllKnown),
         remove_cards(AllKnown, StarterDeck, UpdatedDeck),
@@ -117,8 +110,6 @@ prob_user(UserCards, DealerCards, (ProbGetTrunc, ProbStayTrunc)) :-
         ;   ProbGetTrunc = 0.0, ProbStayTrunc = 100.0
         )
     ).
-
-% --- Ponto de Entrada Principal ---
 
 calculate_probs(UserCards, DealerCards, (FinalGet, FinalStay)) :-
     sum_cards(UserCards, TotalUser),
