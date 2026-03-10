@@ -2,6 +2,7 @@
 
 :- use_module('./util/auxiliary_functions').
 :- use_module('./components/prob_algorithm').
+:- use_module('./components/prob_interpreter').
 
 len_dealers_card([_]).
 all_cards_are_valid(X) :- subset(X, ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']).
@@ -49,7 +50,7 @@ game_loop :-
     validate_user_cards(User_cards),
 
     writeln('Insira a Carta do Dealer: (Digite apenas uma)'),
-    read_line_to_string(user_input, Y),
+    read_line_to_string(user_input, Y), nl,
     atom_string(Dearlers_card_atom, Y),
     Dealers_card = [Dearlers_card_atom], % padronizado em tratar com listas.
     validate_dealers_card(Dealers_card),
@@ -57,8 +58,8 @@ game_loop :-
     check_quantity_card_limits(User_cards, Dealers_card),
 
 	calculate_probs(User_cards, Dealers_card, (Get, Stay)),
-	format('Get prob: ~2f', Get), nl,
-	format('Stay prob: ~2f', Stay_prob_2_decimal), nl,
+    probAnalise(Get, Stay, Analyze_probs),
+	format('~w', Analyze_probs), nl,
 
     restart_game(Choise),
     (Choise == 'J' -> nl, game_loop; 
