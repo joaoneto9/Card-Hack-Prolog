@@ -1,6 +1,6 @@
 <h1 align="center">Card-Hack-Prolog</h1>
 
-_Blackjack_, também conhecido como "21", é um jogo de cartas bastante popular em cassinos e casas de aposta no mundo todo. Suas regras simples podem esconder sua natureza probabilística interessante. Nesse sentido, _Card-Hack_ implementa em _Haskell_ um algoritmo de probabilidades que determina a melhor jogada possível em um contexto de rodadas de _Blackjack_.
+_Blackjack_, também conhecido como "21", é um jogo de cartas bastante popular em cassinos e casas de aposta no mundo todo. Suas regras simples podem esconder sua natureza probabilística interessante. Nesse sentido, _Card-Hack_ implementa, em _Prolog_, um algoritmo de probabilidades que determina a melhor jogada possível em um contexto de rodadas de _Blackjack_.
 
 ---
 
@@ -9,7 +9,7 @@ _Blackjack_, também conhecido como "21", é um jogo de cartas bastante popular 
  - [Estrutura de diretórios](#estrutura-de-diretórios)
  - [Blackjack: objetivos e movimentos](#blackjack-objetivos-e-movimentos)
  - [Cálculo de probabilidades](#cálculo-de-probabilidades)
- - [Como executar o algoritmo](#como-executar-o-algoritmo)
+ - [Executando o algoritmo](#executando-o-algoritmo)
  - [Contribuidores deste repositório](#contribuidores-deste-repositório)
 
 ## Estrutura de diretórios
@@ -129,13 +129,7 @@ E, na interface no interpretador:
 1 ?- [main].
 ```
 
-### Executando código
-
-Depois de compilado, execute o código com:
-
-```bash
-stack exec card-hack-haskell-exe
-```
+### Informações importantes
 
 Um menu interativo será apresentado. Aqui, duas informações merecem destaque:
 
