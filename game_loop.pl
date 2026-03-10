@@ -45,21 +45,19 @@ game_loop :-
     read_line_to_string(user_input, X),
     split(X, ' ', User_cards),
     validate_user_cards(User_cards),
-    format('User Cards: ~w', [User_cards]), nl,
 
-    writeln('Insira a Carta do Dealer: (ex: [A].) -> ps: para letras use aspas simples'),
+    writeln('Insira a Carta do Dealer: (Digite apenas uma)'),
     read_line_to_string(user_input, Y),
-    read_line_to_string(user_input, Y),
-    split(Y, ' ', Dealers_card),
-    validate_dealers_card(Y),
+    atom_string(Dearlers_card_atom, Y),
+    Dealers_card = [Dearlers_card_atom], % padronizado em tratar com listas.
+    validate_dealers_card(Dealers_card),
 
     check_quantity_card_limits(User_cards, Dealers_card),
-    format('Dealers Card: ~w', [Dealers_card]), nl,
 
 	calculate_probs(User_cards, Dealers_card, (Get, Stay)),
 	format('Get prob: ~w', Get), nl,
 	format('Stay prob: ~w', Stay), nl,
 
     restart_game(Choise),
-    (Choise == 'J' -> game_loop; 
+    (Choise == 'J' -> nl, game_loop; 
                     writeln('Fim do programa, obrigado pela preferência. Ass: CARD-HACK')).
