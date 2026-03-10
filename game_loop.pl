@@ -1,3 +1,5 @@
+:- module(game_loop, [game_loop/0]).
+
 :- use_module('./util/auxiliary_functions').
 :- use_module('./components/prob_algorithm').
 
@@ -55,8 +57,8 @@ game_loop :-
     check_quantity_card_limits(User_cards, Dealers_card),
 
 	calculate_probs(User_cards, Dealers_card, (Get, Stay)),
-	format('Get prob: ~w', Get), nl,
-	format('Stay prob: ~w', Stay), nl,
+	format('Get prob: ~2f', Get), nl,
+	format('Stay prob: ~2f', Stay_prob_2_decimal), nl,
 
     restart_game(Choise),
     (Choise == 'J' -> nl, game_loop; 
