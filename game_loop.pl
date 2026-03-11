@@ -77,6 +77,10 @@ game_loop :-
     format('~w', Analyze_probs), nl,
 
     restart_game(Choise),
-    (Choise == 'J' -> nl, game_loop; 
-                    writeln('Fim do programa, obrigado pela preferência. Ass: CARD-HACK')).
-                    
+    ( Choise == 'J' ->
+        nl,
+        game_loop
+    ;
+        writeln('Fim do programa, obrigado pela preferência. Ass: CARD-HACK'),
+        print_game_over
+    ).
