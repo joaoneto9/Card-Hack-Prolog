@@ -61,7 +61,7 @@ _Blackjack_ possui inúmeras variações ao redor do mundo e, consequentemente, 
 
 ## Cálculo de probabilidades
 
-Ao final da execução do algoritmo pelo módulo `ProbAlgorithm.hs`, uma tupla de elemento do tipo _Double_ é retornada, contendo respectivamente: **a probabilidade de o jogador vencer em sua próxima jogada caso opte pelo _hit_** e **a probabilidade de o jogador vencer em sua próxima jogada caso opte pelo _stay_**.
+Ao final da execução do algoritmo pelo módulo `prob_algorithm.pl`, uma tupla de probabilidades é retornada, contendo respectivamente: **a probabilidade de o jogador vencer em sua próxima jogada caso opte pelo _hit_** e **a probabilidade de o jogador vencer em sua próxima jogada caso opte pelo _stay_**.
 
 ### Vencer com _hit_ (_get_)
 
@@ -70,7 +70,7 @@ Para que o jogador vença com um _hit_ em sua próxima jogada, 2 cenários devem
  - Antes de jogar, o jogador possui **menos** pontos do que o _Dealer_; -> P(menos)
  - Antes de jogar, o jogador possui **mais** pontos do que o _Dealer_. -> P(mais)
 
-Como exemplo para demonstrar os cálculos realizados em `ProbAlgorithm.hs`, consideremos a probabilidade de o jogador vencer em sua próxima jogada caso opte por _hit_ e possua menos pontos do que o _Dealer_. Nesse caso, tem-se:
+Como exemplo para demonstrar os cálculos realizados em `prob_algorithm.pl`, consideremos a probabilidade de o jogador vencer em sua próxima jogada caso opte por _hit_ e possua menos pontos do que o _Dealer_. Nesse caso, tem-se:
 
 ### Vencer com _stay_
 
