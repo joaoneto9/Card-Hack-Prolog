@@ -146,6 +146,8 @@ Agora, basta se divertir e ganhar todas no _Blackjack_!
  - [Matteus Marinho](https://github.com/matteuscantisani)
  - [Pedro Trovão](https://github.com/PedroBMTrovao)
 
+Confira [**aqui**](https://github.com/guinoronhaf/Card-Hack-Haskell) a implementação de _Card-Hack_ em _Haskell_!
+
  ---
 
 Repositório construído como trabalho da disciplina de Pardigmas de Linguagens de Programação, ministrado pelo Prof. Ricardo Oliveira durante o período 2025.2, no curso de Ciência da Computação da Universidade Federal de Campina Grande (UFCG).
