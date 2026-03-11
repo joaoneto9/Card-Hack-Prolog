@@ -3,6 +3,7 @@
 :- use_module('./util/auxiliary_functions').
 :- use_module('./components/prob_algorithm').
 :- use_module('./components/prob_interpreter').
+:- use_module('./components/game_over_screen', [print_game_over/0]).
 
 % len_dealers_card/1: Verifica se a lista da carta do dealer contém exatamente um elemento.
 len_dealers_card([_]).
@@ -78,3 +79,4 @@ game_loop :-
     restart_game(Choise),
     (Choise == 'J' -> nl, game_loop; 
                     writeln('Fim do programa, obrigado pela preferência. Ass: CARD-HACK')).
+                    
