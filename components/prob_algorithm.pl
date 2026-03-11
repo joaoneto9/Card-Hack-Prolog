@@ -3,13 +3,16 @@
 :- use_module(deck).
 :- use_module('../util/auxiliary_functions').
 
+% is_blackjack/1: Verifica se a soma das cartas fornecidas é exatamente 21.
 is_blackjack(Cards) :-
     sum_cards(Cards, 21).
 
+% is_overflow/1: Verifica se a soma das cartas excede 21 (estourou).
 is_overflow(Cards) :-
     sum_cards(Cards, Sum),
     Sum > 21.
 
+% overflow_prob/4: Calcula a probabilidade de a próxima carta fazer a soma exceder um determinado limite (Limit).
 overflow_prob(Cards, Limit, Deck, Prob) :-
     sum_cards(Cards, CurrentSum),
     Edge is Limit - CurrentSum,
@@ -22,6 +25,7 @@ overflow_prob(Cards, Limit, Deck, Prob) :-
         (Total > 0 -> Prob is Count / Total ; Prob = 0.0)
     ).
 
+% underflow_prob/4: Calcula a probabilidade de a próxima carta manter a soma abaixo de um limite (Limit).
 underflow_prob(Cards, Limit, Deck, Prob) :-
     sum_cards(Cards, CurrentSum),
     Edge is Limit - CurrentSum,
@@ -38,6 +42,7 @@ underflow_prob(Cards, Limit, Deck, Prob) :-
         (Total > 0 -> Prob is Count / Total ; Prob = 0.0)
     ).
 
+% blackjack_prob/3: Calcula a probabilidade de a próxima carta resultar em um Blackjack (soma exata de 21).
 blackjack_prob(Cards, Deck, Prob) :-
     sum_cards(Cards, CurrentSum),
     Target is 21 - CurrentSum,
@@ -50,13 +55,16 @@ blackjack_prob(Cards, Deck, Prob) :-
     total_cards_in_deck(Deck, Total),
     (Total > 0 -> Prob is Count / Total ; Prob = 0.0).
 
+% average_prob_user_interface/3: Ponto de entrada para o cálculo estatístico baseado em múltiplas iterações (Monte Carlo).
 average_prob_user_interface(UserCards, DealerCards, Result) :-
     average_prob_user(UserCards, DealerCards, 50, 0, (0.0, 0.0), Result).
 
+% average_prob_user/6 (Caso Base): Finaliza a recursão e calcula a média aritmética das probabilidades acumuladas.
 average_prob_user(_, _, Limit, Limit, (AccGet, AccStay), (FinalGet, FinalStay)) :-
     FinalGet is AccGet / Limit,
     FinalStay is AccStay / Limit, !.
 
+% average_prob_user/6: Acumula os resultados de várias simulações de probabilidade do usuário.
 average_prob_user(UserCards, DealerCards, Limit, Iter, (AccGet, AccStay), Result) :-
     prob_user(UserCards, DealerCards, (ProbGet, ProbStay)),
     NewAccGet is AccGet + ProbGet,
@@ -64,6 +72,7 @@ average_prob_user(UserCards, DealerCards, Limit, Iter, (AccGet, AccStay), Result
     NextIter is Iter + 1,
     average_prob_user(UserCards, DealerCards, Limit, NextIter, (NewAccGet, NewAccStay), Result).
 
+% prob_user/3: Estima as chances de sucesso ao "Pedir" (Get) ou "Manter" (Stay) com base no estado atual das mãos e do baralho.
 prob_user(UserCards, DealerCards, (ProbGetTrunc, ProbStayTrunc)) :-
     sum_cards(UserCards, SumUser),
     (   SumUser >= 21 
@@ -111,6 +120,8 @@ prob_user(UserCards, DealerCards, (ProbGetTrunc, ProbStayTrunc)) :-
         )
     ).
 
+% calculate_probs/3: Predicado principal exportado. Trata estados terminais (Blackjack ou Estouro) 
+% ou chama o motor de média de probabilidades para fornecer a recomendação final.
 calculate_probs(UserCards, DealerCards, (FinalGet, FinalStay)) :-
     sum_cards(UserCards, TotalUser),
     (   TotalUser =:= 21
