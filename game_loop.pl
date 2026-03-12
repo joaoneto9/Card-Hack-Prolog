@@ -59,12 +59,12 @@ restart_game(Choise) :-
 % game_loop/0: Predicado principal que coordena o fluxo do programa: leitura de inputs, 
 % validações, chamada dos algoritmos de probabilidade e reinicialização.
 game_loop :-
-    writeln('Insira as Cartas do Jogador: (separe por espaço " ")'),
+    writeln('Insira as Cartas do Jogador: (separe por espaço " ") ex: 7 A'),
     read_line_to_string(user_input, X),
     split(X, ' ', User_cards),
     validate_user_cards(User_cards),
 
-    writeln('Insira a Carta do Dealer: (Digite apenas uma)'),
+    writeln('Insira a Carta do Dealer: (Digite apenas uma) ex: J'),
     read_line_to_string(user_input, Y), nl,
     atom_string(Dearlers_card_atom, Y),
     Dealers_card = [Dearlers_card_atom], % padronizado em tratar com listas.
