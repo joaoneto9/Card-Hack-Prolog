@@ -1,0 +1,26 @@
+name: CI Prolog
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v6
+
+      - name: Instalar SWI-Prolog
+        run: |
+          sudo apt update
+          sudo apt install -y swi-prolog
+
+      - name: Verificar versão
+        run: swipl --version
+
+      - name: Validar carregamento do projeto
+        run: swipl -q -g main -t halt -s main.pl
